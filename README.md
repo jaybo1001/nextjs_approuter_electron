@@ -1,4 +1,50 @@
-# NextJS App Router with Electron, SSR, Server Components, etc.
+
+
+# NextJS App Router with Electron, SSR, and Server Components
+
+![App Image](https://raw.githubusercontent.com/spa5k/nextjs_approuter_electron/main/public/app.png)
+
+This project combines Next.js with Electron, enabling the development of desktop applications that leverage Server-Side Rendering (SSR) and React Server Components (RSC) using a shared codebase.
+
+## Project Overview
+
+- **Next.js App Router**
+- **Electron Integration**
+- **Server-Side Rendering (SSR)**
+- **React Server Components (RSC)**
+- **Shared Codebase for Web and Desktop**
+
+## Running the Application
+
+To run the application in development mode:
+
+```bash
+make dev
+```
+
+This command starts both the Next.js development server and the Electron application simultaneously.
+
+To build the Electron application for distribution:
+
+```bash
+make electron_dist
+```
+
+## Available Commands
+
+You can view all available commands by running:
+
+```bash
+make help
+```
+
+This will display a summary of all tasks and their descriptions defined in the `Makefile`.
+
+## Additional Information
+
+- The project uses `pnpm` for package management.
+- The `Makefile` contains tasks for development, building, and distribution.
+- For detailed information about the project structure and configuration, refer to the source code and comments within the files.# NextJS App Router with Electron, SSR, Server Components, etc.
 
 ![nextjsimage](https://raw.githubusercontent.com/spa5k/nextjs_approuter_electron/main/public/nextjs_electron.png)
 
