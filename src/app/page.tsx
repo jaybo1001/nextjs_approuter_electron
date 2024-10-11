@@ -1,15 +1,16 @@
-import { CounterClientComponent } from "@/components/ClientComponent";
-import { ElectronCheck } from "@/components/ElectronCheck";
-import { ServerPokemonComponent } from "@/components/ServerComponent";
+'use client'
+import React from "react";
+import { NextUIProvider } from "@nextui-org/react";
+import App from "./ChatPage1/App";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-around p-24 flex-row">
-      <ElectronCheck />
-
-      <ServerPokemonComponent />
-
-      <CounterClientComponent />
-    </main>
+    <React.StrictMode>
+      <NextUIProvider>
+        <div className="w-screen h-screen p-8 flex items-start justify-center">
+          <App />
+        </div>
+      </NextUIProvider>
+    </React.StrictMode>
   );
 }
