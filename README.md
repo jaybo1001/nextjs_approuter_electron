@@ -1,4 +1,122 @@
 
+# How to start in Dev Mode
+To correctly start the Electron app for both development and production environments, ensuring it launches the Next.js application, you need to follow these steps:
+
+1. For Development:
+
+Use the `make dev` command, which runs both the Next.js development server and the Electron app in development mode. This command is defined in the `package.json` file:
+
+
+```25:25:nextjs_approuter_electron/package.json
+    "dev": "npm-run-all --parallel electron:dev next:dev",
+```
+
+
+This command runs two scripts in parallel:
+
+a. `next:dev`: Starts the Next.js development server
+b. `electron:dev`: Starts the Electron app in development mode
+
+The Electron app in development mode is configured to load the Next.js app from `http://localhost:3000`, as seen in the `main.ts` file:
+
+
+```19:31:nextjs_approuter_electron/electron/src/main.ts
+  const loadURL = async () => {
+    if (is.dev) {
+      mainWindow.loadURL("http://localhost:3000");
+    } else {
+      try {
+        const port = await startNextJSServer();
+        console.log("Next.js server started on port:", port);
+        mainWindow.loadURL(`http://localhost:${port}`);
+      } catch (error) {
+        console.error("Error starting Next.js server:", error);
+      }
+    }
+  };
+```
+
+
+2. For Production:
+
+To run the Electron app in production mode, you need to:
+
+a. Build the Next.js app:
+```
+make next:build
+```
+
+b. Build the Electron app:
+```
+make electron:build
+```
+
+c. Package the Electron app:
+```
+make electron:dist
+```
+
+These commands are defined in the `package.json` file:
+
+
+```14:24:nextjs_approuter_electron/package.json
+    "next:dev": "next dev",
+    "next:build": "next build",
+    "next:start": "next start",
+    "next:lint": "next lint",
+    "format": "dprint fmt",
+    "postinstall": "electron-builder install-app-deps",
+    "electron:dist": "electron-builder --dir",
+    "electron:dist:deb": "electron-builder --linux deb",
+    "electron:build": "tsup",
+    "build": "run-s next:build electron:build",
+    "dist": "run-s build electron:dist",
+```
+
+
+In production mode, the Electron app starts a Next.js server on a dynamically assigned port and loads it, as seen in the `main.ts` file:
+
+
+```37:58:nextjs_approuter_electron/electron/src/main.ts
+const startNextJSServer = async () => {
+  try {
+    const nextJSPort = await getPort({ portRange: [30_011, 50_000] });
+    const webDir = join(app.getAppPath(), "app");
+
+    await startServer({
+      dir: webDir,
+      isDev: false,
+      hostname: "localhost",
+      port: nextJSPort,
+      customServer: true,
+      allowRetry: false,
+      keepAliveTimeout: 5000,
+      minimalMode: true,
+    });
+
+    return nextJSPort;
+  } catch (error) {
+    console.error("Error starting Next.js server:", error);
+    throw error;
+  }
+};
+```
+
+
+To simplify the process, you can use the `make dist` command, which builds both Next.js and Electron apps and then packages the Electron app:
+
+
+```24:24:nextjs_approuter_electron/package.json
+    "dist": "run-s build electron:dist",
+```
+
+
+After running `make dist`, you'll find the packaged Electron app in the `dist` directory. You can then run the executable to start the Electron app with the Next.js application in production mode.
+
+Remember to ensure all dependencies are installed using `pnpm` before running these commands, as specified in the project's README.
+
+
+
 
 # NextJS App Router with Electron, SSR, and Server Components
 
