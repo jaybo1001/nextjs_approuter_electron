@@ -1,23 +1,31 @@
 'use client'
 
-import React from "react";
-import { Button } from "@nextui-org/react";
+import React, { useEffect } from "react";
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
 
 export default function Home() {
   const router = useRouter();
+  const supabase = createClient();
 
-  const simulateLoggedIn = () => {
-    // Here you would typically set some auth state or token
-    // For now, we'll just navigate to the protected page
-    router.push('/protected');
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const checkUser = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        router.push('/protected');
+      } else {
+        router.push('/login');
+      }
+    } catch (error) {
+      console.error('Error checking user session:', error);
+      router.push('/login'); // Default to login page if there's an error
+    }
   };
 
-  return (
-    <div className="w-screen h-screen p-8 flex flex-col items-center justify-center">
-      <Button color="primary" className="mb-4" onPress={() => router.push('/login')}>Sign In</Button>
-      <Button color="secondary" className="mb-4" onPress={() => router.push('/signup')}>Sign Up</Button>
-      <Button color="success" onPress={simulateLoggedIn}>Simulate User Already Logged In</Button>
-    </div>
-  );
+  // Return null or a loading indicator while checking auth status
+  return <div>Loading...</div>; // Or use a more sophisticated loading component
 }

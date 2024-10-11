@@ -1,14 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {Button, Input, Link, Divider} from "@nextui-org/react";
 import {AnimatePresence, m, LazyMotion, domAnimation} from "framer-motion";
 import {Icon} from "@iconify/react";
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
 
 export default function SignUp() {
-  const [isFormVisible, setIsFormVisible] = React.useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
+  const supabase = createClient();
 
   const variants = {
     visible: {opacity: 1, y: 0},
@@ -27,6 +31,22 @@ export default function SignUp() {
     router.push('/login');
   };
 
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error('Error signing up:', error.message);
+      // Handle error (e.g., show error message to user)
+    } else {
+      console.log('Signed up successfully:', data);
+      router.push('/login'); // Redirect to login page after successful signup
+    }
+  };
+
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pb-10 pt-6 shadow-small">
@@ -40,7 +60,7 @@ export default function SignUp() {
                 exit="hidden"
                 initial="hidden"
                 variants={variants}
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSignUp}
               >
                 <Input
                   autoFocus
@@ -49,6 +69,8 @@ export default function SignUp() {
                   name="email"
                   type="email"
                   variant="bordered"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <Input
                   isRequired
@@ -56,6 +78,8 @@ export default function SignUp() {
                   name="password"
                   type="password"
                   variant="bordered"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <Button color="primary" type="submit">
                   Sign Up

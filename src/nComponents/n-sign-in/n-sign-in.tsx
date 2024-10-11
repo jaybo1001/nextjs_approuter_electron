@@ -1,14 +1,18 @@
 "use client";
 
-import React from "react";
-import {Button, Input, Link, Divider, ResizablePanel} from "@nextui-org/react";
-import {AnimatePresence, m, domAnimation, LazyMotion} from "framer-motion";
-import {Icon} from "@iconify/react";
+import React, { useState } from "react";
+import { Button, Input, Link, Divider, ResizablePanel } from "@nextui-org/react";
+import { AnimatePresence, m, domAnimation, LazyMotion } from "framer-motion";
+import { Icon } from "@iconify/react";
 import { useRouter } from 'next/navigation';
+import { createClient } from '@/utils/supabase/client';
 
 export default function SignIn() {
-  const [isFormVisible, setIsFormVisible] = React.useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
+  const supabase = createClient();
 
   const variants = {
     visible: {opacity: 1, y: 0},
@@ -27,6 +31,22 @@ export default function SignIn() {
     router.push('/signup');
   };
 
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error('Error signing in:', error.message);
+      // Handle error (e.g., show error message to user)
+    } else {
+      console.log('Signed in successfully:', data);
+      router.push('/protected'); // Redirect to protected page after successful login
+    }
+  };
+
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="flex w-full max-w-sm flex-col gap-4 rounded-large bg-content1 px-8 pb-10 pt-6 shadow-small">
@@ -41,7 +61,7 @@ export default function SignIn() {
                   exit="hidden"
                   initial="hidden"
                   variants={variants}
-                  onSubmit={(e) => e.preventDefault()}
+                  onSubmit={handleSignIn}
                 >
                   <Input
                     autoFocus
@@ -49,8 +69,17 @@ export default function SignIn() {
                     name="email"
                     type="email"
                     variant="bordered"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                  <Input label="Password" name="password" type="password" variant="bordered" />
+                  <Input
+                    label="Password"
+                    name="password"
+                    type="password"
+                    variant="bordered"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                   <Button color="primary" type="submit">
                     Log In
                   </Button>
