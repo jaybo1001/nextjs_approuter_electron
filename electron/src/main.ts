@@ -64,6 +64,11 @@ app.whenReady().then(() => {
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
+
+  // Add this method to opt into secure restorable state coding
+  app.on('applicationSupportsSecureRestorableState', () => {
+    return true;
+  });
 });
 
 app.on("window-all-closed", () => {
