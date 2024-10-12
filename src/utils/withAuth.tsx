@@ -1,19 +1,21 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { useRouter } from 'next/navigation';
-import { createClient } from '@/utils/supabase/client';
+import { useAuth } from '@/contexts/AuthContext';
 
 export function withAuth(WrappedComponent: React.ComponentType) {
   return function AuthenticatedComponent(props: any) {
     const router = useRouter();
-    const supabase = createClient();
+    const { user } = useAuth();
 
-    useEffect(() => {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        if (!session) {
-          router.push('/login');
-        }
-      });
-    }, []);
+    React.useEffect(() => {
+      if (!user) {
+        router.push('/login');
+      }
+    }, [user, router]);
+
+    if (!user) {
+      return null;
+    }
 
     return <WrappedComponent {...props} />;
   };

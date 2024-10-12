@@ -24,7 +24,7 @@ const Cockpit: React.FC = () => {
       if (divider === 'rightSidebar') {
         newValue = prev[divider] - (delta / containerSize) * 100;
       } else {
-        newValue = prev[divider] + (delta / containerSize) * 100;
+        newValue = prev[divider as keyof typeof prev] + (delta / containerSize) * 100;
       }
 
       return { ...prev, [divider]: Math.max(10, Math.min(90, newValue)) };
@@ -32,7 +32,7 @@ const Cockpit: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex flex-col text-white">
+    <div className="w-screen h-screen flex-1 flex-col text-white">
       <div className="flex-1 flex overflow-hidden">
         <div className="h-full w-[65px] flex-shrink-0">
           <LeftControls2 />
@@ -50,8 +50,8 @@ const Cockpit: React.FC = () => {
               dragConstraints={{ top: 0, bottom: 0 }}
               onDrag={(_, info) => handleDrag(info, 'vertical', 'bottomDivider')}
             />
-            <div className="flex" style={{ height: `${100 - layout.bottomDivider}%` }}>
-              <div className="flex-1 overflow-auto">
+            <div className="flex" style={{ maxHeight: `${100 - layout.bottomDivider}%` }}>
+              <div className="flex-1 overflow-hidden">
                 <ConsolePanel2 />
               </div>
             </div>

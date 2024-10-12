@@ -1,18 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, Link, Divider, ResizablePanel } from "@nextui-org/react";
 import { AnimatePresence, m, domAnimation, LazyMotion } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function SignIn() {
+  console.log("SignIn: Component rendered");
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
   const supabase = createClient();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    console.log("SignIn: useEffect triggered", { userExists: !!user });
+    if (user) {
+      console.log("SignIn: User found, redirecting to /protected");
+      router.push('/protected');
+    }
+  }, [user, router]);
 
   const variants = {
     visible: {opacity: 1, y: 0},
@@ -32,18 +43,15 @@ export default function SignIn() {
   };
 
   const handleSignIn = async (e: React.FormEvent) => {
+    console.log("SignIn: Sign in attempt started", { email });
     e.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
-      console.error('Error signing in:', error.message);
+      console.error("SignIn: Error signing in", error.message);
       // Handle error (e.g., show error message to user)
     } else {
-      console.log('Signed in successfully:', data);
-      router.push('/protected'); // Redirect to protected page after successful login
+      console.log("SignIn: Sign in successful");
     }
   };
 

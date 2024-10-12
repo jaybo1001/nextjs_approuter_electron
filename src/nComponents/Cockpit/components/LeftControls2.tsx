@@ -106,10 +106,10 @@ export default function LeftControls2() {
   return (
     <div className="h-dvh bg-transparent">
       <div className="relative flex h-full w-16 flex-1 flex-col items-center px-2 py-8 bg-transparent">
-        <Spacer y={0} />
+        <Spacer y={20} />
 
-        <ScrollShadow className="-mr-2 h-full max-h-full py-6 pr-2">
-          <div className="flex flex-col items-center gap-4">
+        <ScrollShadow className="-mr-2 h-full min-h-full pr-2">
+          <div className="flex flex-col items-center gap-6">
             <Tooltip content="Search" placement="right">
               <Button
                 isIconOnly
@@ -140,7 +140,7 @@ export default function LeftControls2() {
             }}
           />
 
-          <Spacer y={8} />
+          <Spacer y={2} />
 
           <div className="mt-auto flex flex-col items-center">
             <Tooltip content="Help & Feedback" placement="right">

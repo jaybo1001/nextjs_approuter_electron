@@ -63,37 +63,56 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    // Initial session check
-    supabase.auth.getSession().then(async ({ data: { session }, error }) => {
-      if (error) {
-        setError(error.message);
-      }
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        setLoading(true);
-        await fetchApps();
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    });
+    console.log("AuthProvider: useEffect triggered");
+    let isMounted = true;
 
-    // Listen for auth changes
+    const initializeAuth = async () => {
+      console.log("AuthProvider: Initializing auth");
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        console.log("AuthProvider: Got session", { session, error });
+        if (error) throw error;
+
+        if (isMounted) {
+          setUser(session?.user ?? null);
+          console.log("AuthProvider: User set", session?.user);
+          setLoading(false);  // Set loading to false immediately after setting user
+          if (session?.user) {
+            console.log("AuthProvider: Fetching apps");
+            fetchApps().catch(console.error);  // Fetch apps in the background
+          }
+        }
+      } catch (error) {
+        console.error("AuthProvider: Error during initialization", error);
+        if (isMounted) {
+          setError(error instanceof Error ? error.message : 'Unknown error during initialization');
+          setLoading(false);  // Ensure loading is set to false even if there's an error
+        }
+      }
+    };
+
+    initializeAuth();
+
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          setLoading(true);
-          await fetchApps();
-          setLoading(false);
-        } else {
-          setApps([]);
-          setLoading(false);
+        console.log("AuthProvider: Auth state changed", { event, session });
+        if (isMounted) {
+          setUser(session?.user ?? null);
+          setLoading(false);  // Set loading to false immediately
+          if (session?.user) {
+            console.log("AuthProvider: User logged in, fetching apps");
+            fetchApps().catch(console.error);  // Fetch apps in the background
+          } else {
+            console.log("AuthProvider: User logged out, clearing apps");
+            setApps([]);
+          }
         }
       }
     );
 
     return () => {
+      isMounted = false;
+      console.log("AuthProvider: Cleaning up auth listener");
       authListener.subscription.unsubscribe();
     };
   }, []);

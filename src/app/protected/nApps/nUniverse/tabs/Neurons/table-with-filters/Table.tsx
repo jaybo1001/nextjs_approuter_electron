@@ -113,9 +113,9 @@ export default function TableComponent() {
 
   const itemFilter = useCallback(
     (file: CodebaseFile) => {
-      let allType = typeFilter === "all";
-      let allStatus = statusFilter === "all";
-      let allCreated = createdFilter === "all";
+      const allType = typeFilter === "all";
+      const allStatus = statusFilter === "all";
+      const allCreated = createdFilter === "all";
 
       return (
         (allType || typeFilter === file.fileInfo.type.toLowerCase()) &&
