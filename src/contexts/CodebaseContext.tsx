@@ -83,7 +83,7 @@ export const CodebaseProvider: React.FC<React.PropsWithChildren<{}>> = ({ childr
     setError(null);
     try {
       if (window.electronAPI && typeof window.electronAPI.getFiles === 'function') {
-        const result = await window.electronAPI.getFiles();
+        const result = await window.electronAPI.getFiles(process.cwd());
         if (result.status === 'success') {
           const newFiles = result.data as FileData[];
           setFiles(newFiles);
@@ -136,4 +136,3 @@ export const CodebaseProvider: React.FC<React.PropsWithChildren<{}>> = ({ childr
     </CodebaseContext.Provider>
   );
 };
-

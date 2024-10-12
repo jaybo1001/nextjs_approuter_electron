@@ -1,0 +1,7 @@
+authtoken: 2Tb4LNhiGmQgNK2pjmBwopAEKQY_Mn5axKSov9nbJsVmN56s
+version: 2
+tunnels:
+  your_tunnel_name:
+    proto: http
+    hostname: neucleos.app
+    addr: 127.0.0.1:8000

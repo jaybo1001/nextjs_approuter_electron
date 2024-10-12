@@ -9,7 +9,7 @@ import ConsolePanel2 from '@/nComponents/Cockpit/CockpitPanels/ConsolePanel2';
 import RightPanelTabContent from '@/nComponents/Cockpit/RightPanel/RightPanel';
 import Footer from '@/nComponents/footer/';
 
-const DraggableLayout: React.FC = () => {
+const Cockpit: React.FC = () => {
   const [layout, setLayout] = useState({
     rightSidebar: 20,
     bottomDivider: 70,
@@ -77,4 +77,4 @@ const DraggableLayout: React.FC = () => {
   );
 };
 
-export default DraggableLayout;
+export default Cockpit;

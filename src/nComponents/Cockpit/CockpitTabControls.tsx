@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import { cn } from "@/utils/tailwind-merge";
 import { useCockpitTabs } from '@/contexts/CockpitTabsContext';
-import nColors from '@nColors';
+import nColors from './nColors';
 
 const processIconSVG = (iconSVG: string) => {
   const parser = new DOMParser();

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import { useWorkingState } from '../../../../../@/contexts/WorkingStateContext';
-import { N3DModelGenerationIcon } from '@/nComponents/icons/N3DModelGenerationIcon';
+import { useWorkingState } from '@/contexts/WorkingStateContext';
+import { N3DModelGenerationIcon } from '../console-panel-icons/N3DModelGenerationIcon';
 
 const N3DModelGeneration: React.FC = () => {
   const { workingState } = useWorkingState();

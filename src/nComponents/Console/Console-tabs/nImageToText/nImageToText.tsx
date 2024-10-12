@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useWorkingState } from '../../../../../@/contexts/WorkingStateContext';
+import { useWorkingState } from '@/contexts/WorkingStateContext';
 
-const NAbilities: React.FC = () => {
+const NImageToText: React.FC = () => {
   const { workingState } = useWorkingState();
-  const { nAbilitiesWorking } = workingState;
+  const { nImageToTextWorking } = workingState;
 
   const imageVariants = {
     initial: { scale: 1 },
@@ -20,18 +20,18 @@ const NAbilities: React.FC = () => {
   };
 
   return (
-    <div className="nAbilities flex flex-col h-full w-full bg-black text-white p-4">
-      <h2 className="text-2xl font-bold mb-4">nAbilities</h2>
+    <div className="nImageToText flex flex-col h-full w-full bg-black text-white p-4">
+      <h2 className="text-2xl font-bold mb-4">Image to Text</h2>
       <motion.img
-        src="/CleoWorkflow_concept.svg"
-        alt="Cleo Workflow"
+        src="/ImageToText_concept.svg"
+        alt="Image to Text Workflow"
         className="w-full h-auto"
         variants={imageVariants}
         initial="initial"
-        animate={nAbilitiesWorking ? 'animate' : 'initial'}
+        animate={nImageToTextWorking ? 'animate' : 'initial'}
       />
     </div>
   );
 };
 
-export default NAbilities;
+export default NImageToText;

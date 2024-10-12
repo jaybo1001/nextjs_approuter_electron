@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
-import DraggableLayout from './providers/DraggableLayout';
+import Cockpit from '../nComponents/Cockpit/Cockpit-App';
 
 export default function Home() {
   const router = useRouter();
@@ -34,5 +34,5 @@ export default function Home() {
   }
 
   // Render your main application layout
-  return <DraggableLayout />;
+  return <Cockpit />;
 }
