@@ -249,7 +249,7 @@ const ControlledTemplate = (args: TooltipProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   const handleOpen = () => {
-    // eslint-disable-next-line no-console
+     
     console.log("handleOpen");
     setIsOpen((prev) => !prev);
   };

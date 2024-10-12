@@ -106,7 +106,7 @@ export function useCalendarPicker(props: CalendarPickerProps) {
 
       if (!itemValue) return;
 
-      let date = state.focusedDate.set(list === "months" ? {month: itemValue} : {year: itemValue});
+      const date = state.focusedDate.set(list === "months" ? {month: itemValue} : {year: itemValue});
 
       state.setFocusedDate(date);
     },

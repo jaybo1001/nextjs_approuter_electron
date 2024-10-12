@@ -31,7 +31,7 @@ const Breadcrumbs = forwardRef<"div", BreadcrumbsProps>((props, ref) => {
   });
 
   const content = useMemo(() => {
-    let items = children?.map((child, i) => {
+    const items = children?.map((child, i) => {
       const isLast = i === childCount - 1;
       const itemKey = child?.key || i;
 

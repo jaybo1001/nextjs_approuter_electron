@@ -61,17 +61,17 @@ export function useHiddenSelect<T>(
   state: MultiSelectState<T>,
   triggerRef: RefObject<FocusableElement>,
 ) {
-  let data = selectData.get(state) || {};
-  let {
+  const data = selectData.get(state) || {};
+  const {
     autoComplete,
     name = data.name,
     isDisabled = data.isDisabled,
     selectionMode,
     onChange,
   } = props;
-  let {validationBehavior, isRequired} = data;
-  let modality = useInteractionModality();
-  let {visuallyHiddenProps} = useVisuallyHidden();
+  const {validationBehavior, isRequired} = data;
+  const modality = useInteractionModality();
+  const {visuallyHiddenProps} = useVisuallyHidden();
 
   useFormReset(props.selectRef!, state.selectedKeys, state.setSelectedKeys);
   useFormValidation(
@@ -128,9 +128,9 @@ export function useHiddenSelect<T>(
  * form autofill, mobile form navigation, and native form submission.
  */
 export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
-  let {state, triggerRef, selectRef, label, name, isDisabled} = props;
+  const {state, triggerRef, selectRef, label, name, isDisabled} = props;
 
-  let {containerProps, inputProps, selectProps} = useHiddenSelect(
+  const {containerProps, inputProps, selectProps} = useHiddenSelect(
     {...props, selectRef},
     state,
     triggerRef,
@@ -148,7 +148,7 @@ export function HiddenSelect<T>(props: HiddenSelectProps<T>) {
           <select {...selectProps} ref={selectRef}>
             <option />
             {[...state.collection.getKeys()].map((key) => {
-              let item = state.collection.getItem(key);
+              const item = state.collection.getItem(key);
 
               if (item?.type === "item") {
                 return (

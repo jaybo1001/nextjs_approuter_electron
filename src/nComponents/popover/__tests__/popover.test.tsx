@@ -238,7 +238,7 @@ describe("Popover", () => {
 
     const {getByRole} = wrapper;
 
-    let dialog = getByRole("dialog");
+    const dialog = getByRole("dialog");
 
     // assert that the focus is on the dialog
     expect(dialog).toHaveFocus();

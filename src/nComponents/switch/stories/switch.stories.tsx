@@ -1,4 +1,4 @@
-/* eslint-disable react/display-name */
+ 
 import React from "react";
 import {Meta} from "@storybook/react";
 import {toggle} from "@nextui-org/theme";
@@ -147,7 +147,7 @@ const WithReactHookFormTemplate = (args: SwitchProps) => {
   });
 
   const onSubmit = (data: any) => {
-    // eslint-disable-next-line no-console
+     
     console.log(data);
     alert("Submitted value: " + JSON.stringify(data));
   };

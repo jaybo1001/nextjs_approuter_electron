@@ -519,7 +519,7 @@ const WithSearchInputTemplate = (args: NavbarProps) => {
             size="sm"
             startContent={<SearchIcon className="text-base pointer-events-none flex-shrink-0" />}
             onClear={() => {
-              // eslint-disable-next-line no-console
+               
               console.log("clear");
             }}
           />

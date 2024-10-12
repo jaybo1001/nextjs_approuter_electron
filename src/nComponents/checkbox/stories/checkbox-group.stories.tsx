@@ -117,7 +117,7 @@ const ControlledTemplate = (args: CheckboxGroupProps) => {
   const [selected, setSelected] = React.useState<string[]>(["buenos-aires"]);
 
   React.useEffect(() => {
-    // eslint-disable-next-line no-console
+     
     console.log("Checkbox ", selected);
   }, [selected]);
 

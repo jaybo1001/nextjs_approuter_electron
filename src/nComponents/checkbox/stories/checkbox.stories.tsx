@@ -57,7 +57,7 @@ const ControlledTemplate = (args: CheckboxProps) => {
   const [selected, setSelected] = React.useState<boolean>(true);
 
   React.useEffect(() => {
-    // eslint-disable-next-line no-console
+     
     console.log("Checkbox ", selected);
   }, [selected]);
 
@@ -138,7 +138,7 @@ const WithReactHookFormTemplate = (args: CheckboxProps) => {
   } = useForm();
 
   const onSubmit = (data: any) => {
-    // eslint-disable-next-line no-console
+     
     console.log(data);
     alert("Submitted value: " + data.example);
   };
@@ -200,7 +200,7 @@ export const WithReactHookForm = {
 export const CustomIconFunction = {
   args: {
     ...defaultProps,
-    // eslint-disable-next-line react/display-name
+     
     icon: (props: CheckboxIconProps) => <CloseIcon {...props} />,
   },
 };

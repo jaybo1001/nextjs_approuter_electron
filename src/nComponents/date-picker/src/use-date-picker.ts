@@ -90,7 +90,7 @@ export function useDatePicker<T extends DateValue>({
     onClose,
   } = useDatePickerBase({...originalProps, validationBehavior});
 
-  let state: DatePickerState = useDatePickerState({
+  const state: DatePickerState = useDatePickerState({
     ...originalProps,
     validationBehavior,
     shouldCloseOnSelect: () => !state.hasTime,
@@ -114,7 +114,7 @@ export function useDatePicker<T extends DateValue>({
     [objectToDeps(variantProps), className],
   );
 
-  let {
+  const {
     groupProps,
     labelProps,
     fieldProps,

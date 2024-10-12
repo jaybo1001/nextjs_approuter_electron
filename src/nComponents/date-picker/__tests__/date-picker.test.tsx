@@ -86,15 +86,15 @@ describe("DatePicker", () => {
     });
 
     it("should render a datepicker with a specified date", function () {
-      let {getAllByRole} = render(<DatePicker label="Date" value={new CalendarDate(2019, 2, 3)} />);
+      const {getAllByRole} = render(<DatePicker label="Date" value={new CalendarDate(2019, 2, 3)} />);
 
-      let combobox = getAllByRole("group")[0];
+      const combobox = getAllByRole("group")[0];
 
       expect(combobox).toBeVisible();
       expect(combobox).not.toHaveAttribute("aria-disabled");
       expect(combobox).not.toHaveAttribute("aria-invalid");
 
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(segments.length).toBe(3);
 
@@ -121,17 +121,17 @@ describe("DatePicker", () => {
     });
 
     it('should render a datepicker with granularity="second"', function () {
-      let {getAllByRole} = render(
+      const {getAllByRole} = render(
         <DatePicker granularity="second" label="Date" value={new CalendarDateTime(2019, 2, 3)} />,
       );
 
-      let combobox = getAllByRole("group")[0];
+      const combobox = getAllByRole("group")[0];
 
       expect(combobox).toBeVisible();
       expect(combobox).not.toHaveAttribute("aria-disabled");
       expect(combobox).not.toHaveAttribute("aria-invalid");
 
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(segments.length).toBe(7);
 
@@ -183,13 +183,13 @@ describe("DatePicker", () => {
     });
 
     it("should support autoFocus", function () {
-      let {getAllByRole} = render(<DatePicker autoFocus label="Date" />);
+      const {getAllByRole} = render(<DatePicker autoFocus label="Date" />);
 
       expect(document.activeElement).toBe(getAllByRole("spinbutton")[0]);
     });
 
     it("should pass through data attributes", function () {
-      let {getByTestId} = render(<DatePicker data-testid="foo" label="Date" />);
+      const {getByTestId} = render(<DatePicker data-testid="foo" label="Date" />);
 
       expect(getByTestId("foo")).toHaveAttribute("role", "group");
     });
@@ -216,11 +216,11 @@ describe("DatePicker", () => {
   });
 
   describe("Events", () => {
-    let onBlurSpy = jest.fn();
-    let onFocusChangeSpy = jest.fn();
-    let onFocusSpy = jest.fn();
-    let onKeyDownSpy = jest.fn();
-    let onKeyUpSpy = jest.fn();
+    const onBlurSpy = jest.fn();
+    const onFocusChangeSpy = jest.fn();
+    const onFocusSpy = jest.fn();
+    const onKeyDownSpy = jest.fn();
+    const onKeyUpSpy = jest.fn();
 
     afterEach(() => {
       onBlurSpy.mockClear();
@@ -231,7 +231,7 @@ describe("DatePicker", () => {
     });
 
     it("should focus field, move a segment, and open popover and does not blur", async function () {
-      let {getByRole, getAllByRole} = render(
+      const {getByRole, getAllByRole} = render(
         <DatePicker
           label="Date"
           onBlur={onBlurSpy}
@@ -239,8 +239,8 @@ describe("DatePicker", () => {
           onFocusChange={onFocusChangeSpy}
         />,
       );
-      let segments = getAllByRole("spinbutton");
-      let button = getByRole("button");
+      const segments = getAllByRole("spinbutton");
+      const button = getByRole("button");
 
       expect(onBlurSpy).not.toHaveBeenCalled();
       expect(onFocusChangeSpy).not.toHaveBeenCalled();
@@ -268,13 +268,13 @@ describe("DatePicker", () => {
 
       act(() => jest.runAllTimers());
 
-      let dialog = getByRole("dialog");
+      const dialog = getByRole("dialog");
 
       expect(dialog).toBeVisible();
     });
 
     it("should focus field and leave to blur", async function () {
-      let {getAllByRole} = render(
+      const {getAllByRole} = render(
         <DatePicker
           label="Date"
           onBlur={onBlurSpy}
@@ -282,7 +282,7 @@ describe("DatePicker", () => {
           onFocusChange={onFocusChangeSpy}
         />,
       );
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(onBlurSpy).not.toHaveBeenCalled();
       expect(onFocusChangeSpy).not.toHaveBeenCalled();
@@ -308,7 +308,7 @@ describe("DatePicker", () => {
     });
 
     it("should open popover and call picker onFocus", function () {
-      let {getByRole} = render(
+      const {getByRole} = render(
         <DatePicker
           label="Date"
           onBlur={onBlurSpy}
@@ -317,7 +317,7 @@ describe("DatePicker", () => {
         />,
       );
 
-      let button = getByRole("button");
+      const button = getByRole("button");
 
       expect(onBlurSpy).not.toHaveBeenCalled();
       expect(onFocusChangeSpy).not.toHaveBeenCalled();
@@ -327,14 +327,14 @@ describe("DatePicker", () => {
 
       act(() => jest.runAllTimers());
 
-      let dialog = getByRole("dialog");
+      const dialog = getByRole("dialog");
 
       expect(dialog).toBeVisible();
       expect(onBlurSpy).not.toHaveBeenCalled();
     });
 
     it("should open and close popover and only call blur when focus leaves picker", async function () {
-      let {getByRole} = render(
+      const {getByRole} = render(
         <DatePicker
           label="Date"
           onBlur={onBlurSpy}
@@ -342,7 +342,7 @@ describe("DatePicker", () => {
           onFocusChange={onFocusChangeSpy}
         />,
       );
-      let button = getByRole("button");
+      const button = getByRole("button");
 
       expect(onBlurSpy).not.toHaveBeenCalled();
       expect(onFocusChangeSpy).not.toHaveBeenCalled();
@@ -351,7 +351,7 @@ describe("DatePicker", () => {
       triggerPress(button);
       act(() => jest.runAllTimers());
 
-      let dialog = getByRole("dialog");
+      const dialog = getByRole("dialog");
 
       expect(dialog).toBeVisible();
 
@@ -383,10 +383,10 @@ describe("DatePicker", () => {
     });
 
     it("should trigger right arrow key event for segment navigation", async function () {
-      let {getAllByRole} = render(
+      const {getAllByRole} = render(
         <DatePicker label="Date" onKeyDown={onKeyDownSpy} onKeyUp={onKeyUpSpy} />,
       );
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(onKeyDownSpy).not.toHaveBeenCalled();
       expect(onKeyUpSpy).not.toHaveBeenCalled();
@@ -412,11 +412,11 @@ describe("DatePicker", () => {
 
   describe("Calendar popover", function () {
     it("should emit onChange when selecting a date in the calendar in controlled mode", function () {
-      let onChange = jest.fn();
+      const onChange = jest.fn();
       const consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
       const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-      let {getByRole, getAllByRole, queryByLabelText} = render(
+      const {getByRole, getAllByRole, queryByLabelText} = render(
         <DatePicker
           hideTimeZone
           isRequired
@@ -426,22 +426,22 @@ describe("DatePicker", () => {
         />,
       );
 
-      let combobox = getAllByRole("group")[0];
+      const combobox = getAllByRole("group")[0];
 
       expect(getTextValue(combobox)).toBe("2/3/2019");
 
-      let button = getByRole("button");
+      const button = getByRole("button");
 
       triggerPress(button);
 
-      let dialog = getByRole("dialog");
+      const dialog = getByRole("dialog");
 
       expect(dialog).toBeVisible();
 
       expect(queryByLabelText("Time")).toBeNull();
 
-      let cells = getAllByRole("gridcell");
-      let selected = cells.find((cell) => cell.getAttribute("aria-selected") === "true");
+      const cells = getAllByRole("gridcell");
+      const selected = cells.find((cell) => cell.getAttribute("aria-selected") === "true");
 
       // @ts-ignore
       expect(selected.children[0]).toHaveAttribute(
@@ -464,25 +464,25 @@ describe("DatePicker", () => {
     });
 
     it("should emit onChange when selecting a date in the calendar in uncontrolled mode", function () {
-      let onChange = jest.fn();
-      let {getByRole, getAllByRole} = render(
+      const onChange = jest.fn();
+      const {getByRole, getAllByRole} = render(
         <DatePicker defaultValue={new CalendarDate(2019, 2, 3)} label="Date" onChange={onChange} />,
       );
 
-      let combobox = getAllByRole("group")[0];
+      const combobox = getAllByRole("group")[0];
 
       expect(getTextValue(combobox)).toBe("2/3/2019");
 
-      let button = getByRole("button");
+      const button = getByRole("button");
 
       triggerPress(button);
 
-      let dialog = getByRole("dialog");
+      const dialog = getByRole("dialog");
 
       expect(dialog).toBeVisible();
 
-      let cells = getAllByRole("gridcell");
-      let selected = cells.find((cell) => cell.getAttribute("aria-selected") === "true");
+      const cells = getAllByRole("gridcell");
+      const selected = cells.find((cell) => cell.getAttribute("aria-selected") === "true");
 
       // @ts-ignore
       expect(selected.children[0]).toHaveAttribute(
@@ -504,15 +504,15 @@ describe("DatePicker", () => {
         <DatePicker showMonthAndYearPickers label="Date" value={new CalendarDate(2024, 5, 1)} />,
       );
 
-      let combobox = getAllByRole("group")[0];
+      const combobox = getAllByRole("group")[0];
 
       expect(getTextValue(combobox)).toBe("5/1/2024");
 
-      let button = getByRole("button");
+      const button = getByRole("button");
 
       triggerPress(button);
 
-      let dialog = getByRole("dialog");
+      const dialog = getByRole("dialog");
 
       expect(dialog).toBeVisible();
 
@@ -708,7 +708,7 @@ describe("DatePicker", () => {
       // open the datepicker dialog by clicking selector button
       triggerPress(selectorButton);
 
-      let dialog = getByRole("dialog");
+      const dialog = getByRole("dialog");
 
       // assert that the datepicker dialog is open
       expect(dialog).toBeVisible();

@@ -1,6 +1,6 @@
-import { CounterClientComponent } from "@/components/ClientComponent";
-import { ElectronCheck } from "@/components/ElectronCheck";
-import { ServerPokemonComponent } from "@/components/ServerComponent";
+import { CounterClientComponent } from "@/nComponents/ClientComponent";
+import { ElectronCheck } from "@/nComponents/ElectronCheck";
+import { ServerPokemonComponent } from "@/nComponents/ServerComponent";
 
 export default function Home() {
   return (

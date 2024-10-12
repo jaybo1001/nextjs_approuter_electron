@@ -497,7 +497,7 @@ const WithReactHookFormTemplate = (args: InputProps) => {
   });
 
   const onSubmit = (data: any) => {
-    // eslint-disable-next-line no-console
+     
     console.log(data);
     alert("Submitted value: " + JSON.stringify(data));
   };
@@ -601,7 +601,7 @@ export const Clearable = {
     variant: "bordered",
     placeholder: "Enter your email",
     defaultValue: "junior@nextui.org",
-    // eslint-disable-next-line no-console
+     
     onClear: () => console.log("input cleared"),
   },
 };

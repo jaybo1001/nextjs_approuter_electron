@@ -41,7 +41,7 @@ function DateRangePickerField<T extends DateValue>(
 
   const {locale} = useLocale();
 
-  let state = useDateFieldState({
+  const state = useDateFieldState({
     ...otherProps,
     locale,
     createCalendar:

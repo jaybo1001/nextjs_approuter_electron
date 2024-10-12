@@ -507,12 +507,12 @@ const CustomCellWithClassnamesTemplate = (args: TableProps) => {
 };
 
 const SortableTemplate = (args: TableProps) => {
-  let list = useAsyncList<SWCharacter>({
+  const list = useAsyncList<SWCharacter>({
     async load({signal}) {
-      let res = await fetch(`https://swapi.py4e.com/api/people/?search`, {
+      const res = await fetch(`https://swapi.py4e.com/api/people/?search`, {
         signal,
       });
-      let json = await res.json();
+      const json = await res.json();
 
       return {
         items: json.results,
@@ -521,8 +521,8 @@ const SortableTemplate = (args: TableProps) => {
     async sort({items, sortDescriptor}) {
       return {
         items: items.sort((a, b) => {
-          let first = a[sortDescriptor.column!];
-          let second = b[sortDescriptor.column!];
+          const first = a[sortDescriptor.column!];
+          const second = b[sortDescriptor.column!];
           let cmp = (parseInt(first) || first) < (parseInt(second) || second) ? -1 : 1;
 
           if (sortDescriptor.direction === "descending") {
@@ -570,7 +570,7 @@ const SortableTemplate = (args: TableProps) => {
 const LoadMoreTemplate = (args: TableProps) => {
   const [page, setPage] = React.useState(1);
 
-  let list = useAsyncList<SWCharacter>({
+  const list = useAsyncList<SWCharacter>({
     async load({signal, cursor}) {
       if (cursor) {
         setPage((prev) => prev + 1);
@@ -579,7 +579,7 @@ const LoadMoreTemplate = (args: TableProps) => {
       // If no cursor is available, then we're loading the first page.
       // Otherwise, the cursor is the next URL to load, as returned from the previous page.
       const res = await fetch(cursor || "https://swapi.py4e.com/api/people/?search=", {signal});
-      let json = await res.json();
+      const json = await res.json();
 
       return {
         items: json.results,
@@ -864,12 +864,12 @@ const AsyncPaginatedTemplate = (args: TableProps) => {
 const InfinitePaginationTemplate = (args: TableProps) => {
   const [hasMore, setHasMore] = React.useState(false);
 
-  let list = useAsyncList<SWCharacter>({
+  const list = useAsyncList<SWCharacter>({
     async load({signal, cursor}) {
       // If no cursor is available, then we're loading the first page.
       // Otherwise, the cursor is the next URL to load, as returned from the previous page.
       const res = await fetch(cursor || "https://swapi.py4e.com/api/people/?search=", {signal});
-      let json = await res.json();
+      const json = await res.json();
 
       setHasMore(json.next !== null);
 

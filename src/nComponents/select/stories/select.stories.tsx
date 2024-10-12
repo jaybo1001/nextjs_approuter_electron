@@ -1,4 +1,4 @@
-/* eslint-disable react/display-name */
+ 
 import type {ValidationResult} from "@react-types/shared";
 
 import React, {ChangeEvent} from "react";
@@ -600,7 +600,7 @@ const WithReactHookFormTemplate = (args: SelectProps) => {
   });
 
   const onSubmit = (data: any) => {
-    // eslint-disable-next-line no-console
+     
     console.log(data);
     alert("Submitted value: " + JSON.stringify(data));
   };

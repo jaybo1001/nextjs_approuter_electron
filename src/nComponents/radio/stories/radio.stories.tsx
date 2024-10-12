@@ -183,7 +183,7 @@ const ControlledTemplate = (args: RadioGroupProps) => {
   const [selectedItem, setSelectedItem] = React.useState<string>("london");
 
   React.useEffect(() => {
-    // eslint-disable-next-line no-console
+     
     console.log("isSelected:", selectedItem);
   }, [selectedItem]);
 

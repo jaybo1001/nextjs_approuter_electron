@@ -110,7 +110,7 @@ describe("Calendar", () => {
     });
 
     it("should center the selected date if multiple months are visible", () => {
-      let {getAllByRole, getByLabelText} = render(
+      const {getAllByRole, getByLabelText} = render(
         <Calendar value={new CalendarDate(2024, 2, 14)} visibleMonths={3} />,
       );
 
@@ -177,12 +177,12 @@ describe("Calendar", () => {
     });
 
     it("should select a date on keyDown Enter/Space (controlled)", () => {
-      let onChange = jest.fn();
-      let value = new CalendarDate(2024, 3, 31);
+      const onChange = jest.fn();
+      const value = new CalendarDate(2024, 3, 31);
 
-      let wrapper = render(<Calendar autoFocus value={value} onChange={onChange} />);
+      const wrapper = render(<Calendar autoFocus value={value} onChange={onChange} />);
 
-      let grid = wrapper.getByRole("grid");
+      const grid = wrapper.getByRole("grid");
       let selectedDate = wrapper.getByLabelText("Selected", {exact: false});
 
       expect(selectedDate.textContent).toBe("31");
@@ -236,16 +236,16 @@ describe("Calendar", () => {
     });
 
     it("should select a date on click (uncontrolled)", () => {
-      let onChange = jest.fn();
-      let {getByLabelText, getByText} = render(
+      const onChange = jest.fn();
+      const {getByLabelText, getByText} = render(
         <Calendar value={new CalendarDate(2024, 3, 31)} onChange={onChange} />,
       );
 
-      let newDate = getByText("17");
+      const newDate = getByText("17");
 
       triggerPress(newDate);
 
-      let selectedDate = getByLabelText("selected", {exact: false});
+      const selectedDate = getByLabelText("selected", {exact: false});
 
       expect(selectedDate.textContent).toBe("31");
       expect(onChange).toHaveBeenCalledTimes(1);
@@ -253,12 +253,12 @@ describe("Calendar", () => {
     });
 
     it("should not select a date on click if isDisabled", () => {
-      let onChange = jest.fn();
-      let {getAllByLabelText, getByText} = render(
+      const onChange = jest.fn();
+      const {getAllByLabelText, getByText} = render(
         <Calendar isDisabled value={new CalendarDate(2024, 3, 31)} onChange={onChange} />,
       );
 
-      let newDate = getByText("17");
+      const newDate = getByText("17");
 
       triggerPress(newDate);
 
@@ -280,24 +280,24 @@ describe("Calendar", () => {
     });
 
     it("should not select a date on click if isReadOnly", () => {
-      let onChange = jest.fn();
-      let {getByLabelText, getByText} = render(
+      const onChange = jest.fn();
+      const {getByLabelText, getByText} = render(
         <Calendar isReadOnly value={new CalendarDate(2024, 3, 31)} onChange={onChange} />,
       );
 
-      let newDate = getByText("17");
+      const newDate = getByText("17");
 
       triggerPress(newDate);
 
-      let selectedDate = getByLabelText("Selected", {exact: false});
+      const selectedDate = getByLabelText("Selected", {exact: false});
 
       expect(selectedDate.textContent).toBe("31");
       expect(onChange).not.toHaveBeenCalled();
     });
 
     it("should not select a date on click if outside the valid date range", () => {
-      let onChange = jest.fn();
-      let {getByLabelText} = render(
+      const onChange = jest.fn();
+      const {getByLabelText} = render(
         <Calendar
           defaultValue={new CalendarDate(2019, 2, 8)}
           maxValue={new CalendarDate(2019, 2, 15)}
@@ -333,9 +333,9 @@ describe("Calendar", () => {
     });
 
     it("should support invalid state", () => {
-      let {getByRole} = render(<Calendar isInvalid defaultValue={new CalendarDate(2022, 3, 11)} />);
+      const {getByRole} = render(<Calendar isInvalid defaultValue={new CalendarDate(2022, 3, 11)} />);
 
-      let cell = getByRole("button", {
+      const cell = getByRole("button", {
         name: "Friday, March 11, 2022 selected",
       }) as HTMLButtonElement;
 
@@ -356,7 +356,7 @@ describe("Calendar", () => {
     });
 
     it("should support custom error message", () => {
-      let {getByRole} = render(
+      const {getByRole} = render(
         <Calendar
           isInvalid
           defaultValue={new CalendarDate(2022, 3, 11)}
@@ -364,7 +364,7 @@ describe("Calendar", () => {
         />,
       );
 
-      let cell = getByRole("button", {
+      const cell = getByRole("button", {
         name: "Friday, March 11, 2022 selected",
       }) as HTMLButtonElement;
 
@@ -385,14 +385,14 @@ describe("Calendar", () => {
     });
 
     it("should not show error message without isInvalid", () => {
-      let {getByRole} = render(
+      const {getByRole} = render(
         <Calendar
           defaultValue={new CalendarDate(2022, 3, 11)}
           errorMessage="This is a custom error message"
         />,
       );
 
-      let cell = getByRole("button", {
+      const cell = getByRole("button", {
         name: "Friday, March 11, 2022 selected",
       }) as HTMLButtonElement;
 
@@ -414,7 +414,7 @@ describe("Calendar", () => {
 
     it("should automatically marks selection as invalid using isDateUnavailable", () => {
       function Example() {
-        let {locale} = useLocale();
+        const {locale} = useLocale();
 
         return (
           <Calendar
@@ -424,9 +424,9 @@ describe("Calendar", () => {
         );
       }
 
-      let {getByRole} = render(<Example />);
+      const {getByRole} = render(<Example />);
 
-      let cell = getByRole("button", {name: "Saturday, March 5, 2022 selected"});
+      const cell = getByRole("button", {name: "Saturday, March 5, 2022 selected"});
 
       expect(cell).toHaveAttribute("aria-invalid", "true");
       expect(cell.parentElement).toHaveAttribute("aria-selected", "true");

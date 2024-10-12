@@ -40,7 +40,7 @@ describe("Radio", () => {
   });
 
   it("should work correctly with initial value", () => {
-    let {container} = render(
+    const {container} = render(
       <RadioGroup label="Options" value="1">
         <Radio data-testid="radio-test-1" value="1">
           Option 1
@@ -50,7 +50,7 @@ describe("Radio", () => {
 
     expect(container.querySelector("[data-testid=radio-test-1] input")).toBeChecked();
 
-    let wrapper = render(
+    const wrapper = render(
       <RadioGroup defaultValue="2" label="Options">
         <Radio value="1">Option 1</Radio>
         <Radio data-testid="radio-test-2" value="2">
@@ -72,7 +72,7 @@ describe("Radio", () => {
       </RadioGroup>,
     );
 
-    let radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
+    const radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
 
     act(() => {
       radio2.click();
@@ -91,7 +91,7 @@ describe("Radio", () => {
       </RadioGroup>,
     );
 
-    let radio1 = container.querySelector(".radio-test-1 input") as HTMLInputElement;
+    const radio1 = container.querySelector(".radio-test-1 input") as HTMLInputElement;
 
     act(() => {
       radio1.click();
@@ -112,7 +112,7 @@ describe("Radio", () => {
       </RadioGroup>,
     );
 
-    let radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
+    const radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
 
     act(() => {
       radio2.click();
@@ -135,7 +135,7 @@ describe("Radio", () => {
       </RadioGroup>,
     );
 
-    let radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
+    const radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
 
     act(() => {
       radio2.focus();
@@ -203,7 +203,7 @@ describe("Radio", () => {
 
     const {container} = render(<Component onValueChange={onValueChange} />);
 
-    let radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
+    const radio2 = container.querySelector(".radio-test-2 input") as HTMLInputElement;
 
     act(() => {
       radio2.click();
@@ -289,7 +289,7 @@ describe("validation", () => {
 
       const radios = getAllByRole("radio") as HTMLInputElement[];
 
-      for (let input of radios) {
+      for (const input of radios) {
         expect(input).toHaveAttribute("required");
         expect(input).not.toHaveAttribute("aria-required");
         expect(input.validity.valid).toBe(false);
@@ -306,7 +306,7 @@ describe("validation", () => {
       expect(document.activeElement).toBe(radios[0]);
 
       await user.click(radios[0]);
-      for (let input of radios) {
+      for (const input of radios) {
         expect(input.validity.valid).toBe(true);
       }
 
@@ -339,7 +339,7 @@ describe("validation", () => {
 
       const radios = getAllByRole("radio") as HTMLInputElement[];
 
-      for (let input of radios) {
+      for (const input of radios) {
         expect(input.validity.valid).toBe(true);
       }
 

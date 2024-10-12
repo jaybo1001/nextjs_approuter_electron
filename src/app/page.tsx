@@ -1,12 +1,14 @@
 'use client'
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
+import DraggableLayout from './providers/DraggableLayout';
 
 export default function Home() {
   const router = useRouter();
   const supabase = createClient();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     checkUser();
@@ -16,7 +18,7 @@ export default function Home() {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        router.push('/protected');
+        setLoading(false);
       } else {
         router.push('/login');
       }
@@ -26,6 +28,11 @@ export default function Home() {
     }
   };
 
-  // Return null or a loading indicator while checking auth status
-  return <div>Loading...</div>; // Or use a more sophisticated loading component
+  if (loading) {
+    // Return a loading indicator while checking auth status
+    return <div>Loading...</div>;
+  }
+
+  // Render your main application layout
+  return <DraggableLayout />;
 }

@@ -140,7 +140,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     expect(triggerButton).toBeTruthy();
 
@@ -150,14 +150,14 @@ describe("Dropdown", () => {
 
     expect(spy).toBeCalledTimes(0);
 
-    let menu = wrapper.queryByRole("menu");
+    const menu = wrapper.queryByRole("menu");
 
     expect(menu).toBeTruthy();
   });
 
   it("should work with single selection (controlled)", async () => {
-    let onOpenChange = jest.fn();
-    let onSelectionChange = jest.fn();
+    const onOpenChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Dropdown onOpenChange={onOpenChange}>
@@ -180,7 +180,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     expect(onOpenChange).toBeCalledTimes(0);
 
@@ -190,14 +190,14 @@ describe("Dropdown", () => {
 
     expect(onOpenChange).toBeCalledTimes(1);
 
-    let menu = wrapper.getByRole("menu");
+    const menu = wrapper.getByRole("menu");
 
     expect(menu).toBeTruthy();
 
     // validates if the menu has the triggerButton id as aria-labelledby
     expect(menu.getAttribute("aria-labelledby")).toBe(triggerButton.id);
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -210,8 +210,8 @@ describe("Dropdown", () => {
   });
 
   it("should work with multiple selection (controlled)", async () => {
-    let onOpenChange = jest.fn();
-    let onSelectionChange = jest.fn();
+    const onOpenChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Dropdown onOpenChange={onOpenChange}>
@@ -234,7 +234,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     expect(onOpenChange).toBeCalledTimes(0);
 
@@ -244,14 +244,14 @@ describe("Dropdown", () => {
 
     expect(onOpenChange).toBeCalledTimes(1);
 
-    let menu = wrapper.getByRole("menu");
+    const menu = wrapper.getByRole("menu");
 
     expect(menu).toBeTruthy();
 
     // validates if the menu has the triggerButton id as aria-labelledby
     expect(menu.getAttribute("aria-labelledby")).toBe(triggerButton.id);
 
-    let menuItems = wrapper.getAllByRole("menuitemcheckbox");
+    const menuItems = wrapper.getAllByRole("menuitemcheckbox");
 
     expect(menuItems.length).toBe(4);
 
@@ -280,7 +280,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -289,7 +289,7 @@ describe("Dropdown", () => {
     expect(menuItems[2].getAttribute("aria-checked")).toBe("false");
     expect(menuItems[3].getAttribute("aria-checked")).toBe("false");
 
-    let svg = menuItems[0].querySelector("svg");
+    const svg = menuItems[0].querySelector("svg");
 
     expect(svg).toBeTruthy();
 
@@ -313,7 +313,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitemcheckbox");
+    const menuItems = wrapper.getAllByRole("menuitemcheckbox");
 
     expect(menuItems.length).toBe(4);
 
@@ -322,13 +322,13 @@ describe("Dropdown", () => {
     expect(menuItems[2].getAttribute("aria-checked")).toBe("false");
     expect(menuItems[3].getAttribute("aria-checked")).toBe("false");
 
-    let checkmark1 = menuItems[0].querySelector("svg");
+    const checkmark1 = menuItems[0].querySelector("svg");
 
     expect(checkmark1).toBeTruthy();
 
     expect(checkmark1?.getAttribute("data-selected")).toBe("true");
 
-    let checkmark2 = menuItems[1].querySelector("svg");
+    const checkmark2 = menuItems[1].querySelector("svg");
 
     expect(checkmark2).toBeTruthy();
 
@@ -352,7 +352,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitem");
+    const menuItems = wrapper.getAllByRole("menuitem");
 
     expect(menuItems.length).toBe(4);
 
@@ -361,7 +361,7 @@ describe("Dropdown", () => {
     expect(menuItems[2].getAttribute("aria-checked")).toBeFalsy();
     expect(menuItems[3].getAttribute("aria-checked")).toBeFalsy();
 
-    let checkmark1 = menuItems[0].querySelector("svg");
+    const checkmark1 = menuItems[0].querySelector("svg");
 
     expect(checkmark1).toBeFalsy();
   });
@@ -385,7 +385,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     expect(triggerButton).toBeTruthy();
 
@@ -393,7 +393,7 @@ describe("Dropdown", () => {
       triggerButton.click();
     });
 
-    let menu = wrapper.queryByRole("menu");
+    const menu = wrapper.queryByRole("menu");
 
     expect(menu).toBeFalsy();
   });
@@ -415,7 +415,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     expect(triggerButton).toBeTruthy();
 
@@ -423,7 +423,7 @@ describe("Dropdown", () => {
       triggerButton.click();
     });
 
-    let menu = wrapper.queryByRole("menu");
+    const menu = wrapper.queryByRole("menu");
 
     expect(menu).toBeFalsy();
   });
@@ -451,7 +451,7 @@ describe("Dropdown", () => {
       </Dropdown>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -621,7 +621,7 @@ describe("Keyboard interactions", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     act(() => {
       triggerButton.focus();
@@ -631,11 +631,11 @@ describe("Keyboard interactions", () => {
 
     fireEvent.keyDown(triggerButton, {key: "Enter", charCode: keyCodes.Enter});
 
-    let menu = wrapper.queryByRole("menu");
+    const menu = wrapper.queryByRole("menu");
 
     expect(menu).toBeTruthy();
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -659,7 +659,7 @@ describe("Keyboard interactions", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     act(() => {
       triggerButton.focus();
@@ -669,11 +669,11 @@ describe("Keyboard interactions", () => {
 
     fireEvent.keyDown(triggerButton, {key: " ", charCode: keyCodes[" "]});
 
-    let menu = wrapper.queryByRole("menu");
+    const menu = wrapper.queryByRole("menu");
 
     expect(menu).toBeTruthy();
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -694,7 +694,7 @@ describe("Keyboard interactions", () => {
           <DropdownItem
             key="new"
             onPress={() => {
-              /* eslint-disable no-console */
+               
               console.log("ENTER");
             }}
           >
@@ -709,7 +709,7 @@ describe("Keyboard interactions", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     act(() => {
       triggerButton.focus();
@@ -719,11 +719,11 @@ describe("Keyboard interactions", () => {
 
     fireEvent.keyDown(triggerButton, {key: "Enter", charCode: keyCodes.Enter});
 
-    let menu = wrapper.queryByRole("menu");
+    const menu = wrapper.queryByRole("menu");
 
     expect(menu).toBeTruthy();
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -752,7 +752,7 @@ describe("Keyboard interactions", () => {
           <DropdownItem
             key="new"
             onPress={() => {
-              /* eslint-disable no-console */
+               
               console.log("SPACE");
             }}
           >
@@ -767,7 +767,7 @@ describe("Keyboard interactions", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     act(() => {
       triggerButton.focus();
@@ -777,11 +777,11 @@ describe("Keyboard interactions", () => {
 
     fireEvent.keyDown(triggerButton, {key: "Enter", charCode: keyCodes.Enter});
 
-    let menu = wrapper.queryByRole("menu");
+    const menu = wrapper.queryByRole("menu");
 
     expect(menu).toBeTruthy();
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -812,14 +812,14 @@ describe("Keyboard interactions", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     act(() => {
       triggerButton.click();
     });
     expect(onOpenChange).toBeCalledTimes(1);
 
-    let menuItems = wrapper.getAllByRole("menuitem");
+    const menuItems = wrapper.getAllByRole("menuitem");
 
     await act(async () => {
       await userEvent.click(menuItems[0]);
@@ -859,14 +859,14 @@ describe("Keyboard interactions", () => {
       </Dropdown>,
     );
 
-    let triggerButton = wrapper.getByTestId("trigger-test");
+    const triggerButton = wrapper.getByTestId("trigger-test");
 
     act(() => {
       triggerButton.click();
     });
     expect(onOpenChange).toBeCalledTimes(1);
 
-    let menuItems = wrapper.getAllByRole("menuitem");
+    const menuItems = wrapper.getAllByRole("menuitem");
 
     await act(async () => {
       await userEvent.click(menuItems[0]);

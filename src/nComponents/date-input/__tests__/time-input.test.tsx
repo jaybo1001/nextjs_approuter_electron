@@ -40,13 +40,13 @@ describe("TimeInput", () => {
     });
 
     it("should support autoFocus", function () {
-      let {getAllByRole} = render(<TimeInput autoFocus label="Time" />);
+      const {getAllByRole} = render(<TimeInput autoFocus label="Time" />);
 
       expect(document.activeElement).toBe(getAllByRole("spinbutton")[0]);
     });
 
     it("should pass through data attributes", function () {
-      let {getByTestId} = render(<TimeInput data-testid="foo" label="Time" />);
+      const {getByTestId} = render(<TimeInput data-testid="foo" label="Time" />);
 
       const input = getByTestId("foo");
 
@@ -54,14 +54,14 @@ describe("TimeInput", () => {
     });
 
     it("should include a selected value description", function () {
-      let {getByRole, getAllByRole} = render(<TimeInput label="Time" value={new Time(8, 45)} />);
+      const {getByRole, getAllByRole} = render(<TimeInput label="Time" value={new Time(8, 45)} />);
 
-      let group = getByRole("group");
+      const group = getByRole("group");
 
       expect(group).toHaveAttribute("aria-describedby");
 
       // @ts-ignore
-      let description = group
+      const description = group
         .getAttribute("aria-describedby")
         .split(" ")
         // @ts-ignore
@@ -70,14 +70,14 @@ describe("TimeInput", () => {
 
       expect(description).toBe("Selected Time: 8:45 AM");
 
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(segments[0]).toHaveAttribute(
         "aria-describedby",
         group.getAttribute("aria-describedby"),
       );
 
-      for (let segment of segments.slice(1)) {
+      for (const segment of segments.slice(1)) {
         expect(segment).not.toHaveAttribute("aria-describedby");
       }
     });
@@ -85,94 +85,94 @@ describe("TimeInput", () => {
 
   describe("Labelling", () => {
     it("should support labeling", function () {
-      let {getAllByRole, getByText} = render(<TimeInput label="Time" />);
+      const {getAllByRole, getByText} = render(<TimeInput label="Time" />);
 
-      let label = getByText("Time");
+      const label = getByText("Time");
 
-      let combobox = getAllByRole("group")[0];
+      const combobox = getAllByRole("group")[0];
 
       expect(combobox).toHaveAttribute("aria-labelledby", label.id);
 
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
-      for (let segment of segments) {
+      for (const segment of segments) {
         expect(segment).toHaveAttribute("id");
-        let segmentId = segment.getAttribute("id");
+        const segmentId = segment.getAttribute("id");
 
         expect(segment).toHaveAttribute("aria-labelledby", `${segmentId} ${label.id}`);
       }
     });
 
     it("should support labeling with aria-label", function () {
-      let {getByRole} = render(<TimeInput aria-label="Event time" />);
+      const {getByRole} = render(<TimeInput aria-label="Event time" />);
 
-      let field = getByRole("group");
+      const field = getByRole("group");
 
       expect(field).toHaveAttribute("aria-label", "Event time");
       expect(field).toHaveAttribute("id");
     });
 
     it("should support labeling with aria-labelledby", function () {
-      let {getByRole, getAllByRole} = render(<TimeInput aria-labelledby="foo" />);
+      const {getByRole, getAllByRole} = render(<TimeInput aria-labelledby="foo" />);
 
-      let combobox = getByRole("group");
+      const combobox = getByRole("group");
 
       expect(combobox).not.toHaveAttribute("aria-label");
       expect(combobox).toHaveAttribute("aria-labelledby", "foo");
 
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
-      for (let segment of segments) {
+      for (const segment of segments) {
         expect(segment).toHaveAttribute("id");
-        let segmentId = segment.getAttribute("id");
+        const segmentId = segment.getAttribute("id");
 
         expect(segment).toHaveAttribute("aria-labelledby", `${segmentId} foo`);
       }
     });
 
     it("should support help text description", function () {
-      let {getByRole, getAllByRole} = render(<TimeInput description="Help text" label="Time" />);
+      const {getByRole, getAllByRole} = render(<TimeInput description="Help text" label="Time" />);
 
-      let group = getByRole("group");
+      const group = getByRole("group");
 
       expect(group).toHaveAttribute("aria-describedby");
 
       const descById = group.getAttribute("aria-describedby");
 
-      let description = descById && document.getElementById(descById);
+      const description = descById && document.getElementById(descById);
 
       expect(description).toHaveTextContent("Help text");
 
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(segments[0]).toHaveAttribute(
         "aria-describedby",
         group.getAttribute("aria-describedby"),
       );
 
-      for (let segment of segments.slice(1)) {
+      for (const segment of segments.slice(1)) {
         expect(segment).not.toHaveAttribute("aria-describedby");
       }
     });
 
     it("should support error message", function () {
-      let {getByRole, getAllByRole} = render(
+      const {getByRole, getAllByRole} = render(
         <TimeInput errorMessage="Error message" label="Time" validationState="invalid" />,
       );
 
-      let group = getByRole("group");
+      const group = getByRole("group");
 
       expect(group).toHaveAttribute("aria-describedby");
 
       if (group) {
-        let descById = group.getAttribute("aria-describedby");
-        let description = descById && document.getElementById(descById);
+        const descById = group.getAttribute("aria-describedby");
+        const description = descById && document.getElementById(descById);
 
         expect(description).toHaveTextContent("Error message");
 
-        let segments = getAllByRole("spinbutton");
+        const segments = getAllByRole("spinbutton");
 
-        for (let segment of segments) {
+        for (const segment of segments) {
           expect(segment).toHaveAttribute(
             "aria-describedby",
             group.getAttribute("aria-describedby"),
@@ -209,11 +209,11 @@ describe("TimeInput", () => {
   });
 
   describe("Events", function () {
-    let onBlurSpy = jest.fn();
-    let onFocusChangeSpy = jest.fn();
-    let onFocusSpy = jest.fn();
-    let onKeyDownSpy = jest.fn();
-    let onKeyUpSpy = jest.fn();
+    const onBlurSpy = jest.fn();
+    const onFocusChangeSpy = jest.fn();
+    const onFocusSpy = jest.fn();
+    const onKeyDownSpy = jest.fn();
+    const onKeyUpSpy = jest.fn();
 
     afterEach(() => {
       onBlurSpy.mockClear();
@@ -224,7 +224,7 @@ describe("TimeInput", () => {
     });
 
     it("should focus field and switching segments via tab does not change focus", async function () {
-      let {getAllByRole} = render(
+      const {getAllByRole} = render(
         <TimeInput
           label="Time"
           onBlur={onBlurSpy}
@@ -232,7 +232,7 @@ describe("TimeInput", () => {
           onFocusChange={onFocusChangeSpy}
         />,
       );
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(onBlurSpy).not.toHaveBeenCalled();
       expect(onFocusChangeSpy).not.toHaveBeenCalled();
@@ -255,7 +255,7 @@ describe("TimeInput", () => {
     });
 
     it("should call blur when focus leaves", async function () {
-      let {getAllByRole} = render(
+      const {getAllByRole} = render(
         <TimeInput
           label="Time"
           onBlur={onBlurSpy}
@@ -263,7 +263,7 @@ describe("TimeInput", () => {
           onFocusChange={onFocusChangeSpy}
         />,
       );
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(onBlurSpy).not.toHaveBeenCalled();
       expect(onFocusChangeSpy).not.toHaveBeenCalled();
@@ -290,10 +290,10 @@ describe("TimeInput", () => {
     });
 
     it("should trigger right arrow key event for segment navigation", async function () {
-      let {getAllByRole} = render(
+      const {getAllByRole} = render(
         <TimeInput label="Time" onKeyDown={onKeyDownSpy} onKeyUp={onKeyUpSpy} />,
       );
-      let segments = getAllByRole("spinbutton");
+      const segments = getAllByRole("spinbutton");
 
       expect(onKeyDownSpy).not.toHaveBeenCalled();
       expect(onKeyUpSpy).not.toHaveBeenCalled();
@@ -318,8 +318,8 @@ describe("TimeInput", () => {
 
   describe("Forms", () => {
     it("supports form values", () => {
-      let {rerender} = render(<TimeInput label="Time" name="time" value={new Time(8, 30)} />);
-      let input = document.querySelector("input[name=time]");
+      const {rerender} = render(<TimeInput label="Time" name="time" value={new Time(8, 30)} />);
+      const input = document.querySelector("input[name=time]");
 
       expect(input).toHaveValue("08:30:00");
 
@@ -339,7 +339,7 @@ describe("TimeInput", () => {
 
     it("supports form reset", async () => {
       function Test() {
-        let [value, setValue] = React.useState<TimeValue>(new Time(8, 30));
+        const [value, setValue] = React.useState<TimeValue>(new Time(8, 30));
 
         return (
           <form>
@@ -349,12 +349,12 @@ describe("TimeInput", () => {
         );
       }
 
-      let {getByTestId, getByRole, getAllByRole} = render(<Test />);
-      let group = getByRole("group");
-      let input = document.querySelector("input[name=time]");
-      let segments = getAllByRole("spinbutton");
+      const {getByTestId, getByRole, getAllByRole} = render(<Test />);
+      const group = getByRole("group");
+      const input = document.querySelector("input[name=time]");
+      const segments = getAllByRole("spinbutton");
 
-      let getDescription = () =>
+      const getDescription = () =>
         // @ts-ignore
         group
           .getAttribute("aria-describedby")
@@ -372,7 +372,7 @@ describe("TimeInput", () => {
       expect(getDescription()).toBe("Selected Time: 9:30 AM");
       expect(input).toHaveValue("09:30:00");
 
-      let button = getByTestId("reset");
+      const button = getByTestId("reset");
 
       triggerPress(button);
 

@@ -60,7 +60,7 @@ export function CalendarBase(props: CalendarBaseProps) {
   const calendars: React.ReactNode[] = [];
 
   for (let i = 0; i < visibleMonths; i++) {
-    let d = currentMonth.add({months: i});
+    const d = currentMonth.add({months: i});
 
     headers.push(
       <Fragment key={`calendar-header-${i}`}>

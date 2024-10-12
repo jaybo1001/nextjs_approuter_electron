@@ -18,4 +18,3 @@ export function withAuth(WrappedComponent: React.ComponentType) {
     return <WrappedComponent {...props} />;
   };
 }
-```

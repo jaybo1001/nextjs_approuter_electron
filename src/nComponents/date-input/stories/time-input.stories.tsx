@@ -92,9 +92,9 @@ const LabelPlacementTemplate = (args: TimeInputProps) => (
 );
 
 const ControlledTemplate = (args: TimeInputProps) => {
-  let [value, setValue] = React.useState<TimeValue>(parseAbsoluteToLocal("2024-04-08T18:45:22Z"));
+  const [value, setValue] = React.useState<TimeValue>(parseAbsoluteToLocal("2024-04-08T18:45:22Z"));
 
-  let formatter = useDateFormatter({dateStyle: "short", timeStyle: "long"});
+  const formatter = useDateFormatter({dateStyle: "short", timeStyle: "long"});
 
   return (
     <div className="w-full flex flex-row gap-2">
@@ -130,7 +130,7 @@ const TimeZonesTemplate = (args: TimeInputProps) => (
 );
 
 const GranularityTemplate = (args: TimeInputProps) => {
-  let [date, setDate] = React.useState<TimeValue>(parseAbsoluteToLocal("2021-04-07T18:45:22Z"));
+  const [date, setDate] = React.useState<TimeValue>(parseAbsoluteToLocal("2021-04-07T18:45:22Z"));
 
   return (
     <div className="w-full max-w-xl flex flex-col items-start gap-4">

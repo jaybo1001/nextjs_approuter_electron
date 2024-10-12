@@ -119,7 +119,7 @@ describe("Listbox", () => {
   });
 
   it("should work with single selection (controlled)", async () => {
-    let onSelectionChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Listbox
@@ -137,11 +137,11 @@ describe("Listbox", () => {
       </Listbox>,
     );
 
-    let listbox = wrapper.getByRole("listbox");
+    const listbox = wrapper.getByRole("listbox");
 
     expect(listbox).toBeTruthy();
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(4);
 
@@ -153,7 +153,7 @@ describe("Listbox", () => {
   });
 
   it("should work with multiple selection (controlled)", async () => {
-    let onSelectionChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Listbox
@@ -171,11 +171,11 @@ describe("Listbox", () => {
       </Listbox>,
     );
 
-    let listbox = wrapper.getByRole("listbox");
+    const listbox = wrapper.getByRole("listbox");
 
     expect(listbox).toBeTruthy();
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(4);
 
@@ -198,7 +198,7 @@ describe("Listbox", () => {
       </Listbox>,
     );
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(4);
 
@@ -207,7 +207,7 @@ describe("Listbox", () => {
     expect(listboxItems[2].getAttribute("aria-selected")).toBe("false");
     expect(listboxItems[3].getAttribute("aria-selected")).toBe("false");
 
-    let svg = listboxItems[0].querySelector("svg");
+    const svg = listboxItems[0].querySelector("svg");
 
     expect(svg).toBeTruthy();
 
@@ -226,7 +226,7 @@ describe("Listbox", () => {
       </Listbox>,
     );
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(4);
 
@@ -235,13 +235,13 @@ describe("Listbox", () => {
     expect(listboxItems[2].getAttribute("aria-selected")).toBe("false");
     expect(listboxItems[3].getAttribute("aria-selected")).toBe("false");
 
-    let checkmark1 = listboxItems[0].querySelector("svg");
+    const checkmark1 = listboxItems[0].querySelector("svg");
 
     expect(checkmark1).toBeTruthy();
 
     expect(checkmark1?.getAttribute("data-selected")).toBe("true");
 
-    let checkmark2 = listboxItems[1].querySelector("svg");
+    const checkmark2 = listboxItems[1].querySelector("svg");
 
     expect(checkmark2).toBeTruthy();
 
@@ -260,7 +260,7 @@ describe("Listbox", () => {
       </Listbox>,
     );
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(4);
 
@@ -269,7 +269,7 @@ describe("Listbox", () => {
     expect(listboxItems[2].getAttribute("aria-selected")).toBeFalsy();
     expect(listboxItems[3].getAttribute("aria-selected")).toBeFalsy();
 
-    let checkmark1 = listboxItems[0].querySelector("svg");
+    const checkmark1 = listboxItems[0].querySelector("svg");
 
     expect(checkmark1).toBeFalsy();
   });

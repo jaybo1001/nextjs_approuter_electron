@@ -23,10 +23,10 @@ const config: Config = {
     nextui({
       themes: {
         "n-dark": {
-          extend: "dark", // This means we'll start with the dark theme and modify from there
+          extend: "dark", // Start with the default dark theme
           colors: {
-            background: "#000000", // Adjust this to your preferred dark background
-            foreground: "#ffffff", // Adjust this to your preferred text color
+            background: "#000000", // Dark background
+            foreground: "#ffffff", // Text color
             primary: {
               50: "#3B096C",
               100: "#520F83",
@@ -41,11 +41,24 @@ const config: Config = {
               DEFAULT: "#DD62ED",
               foreground: "#ffffff",
             },
-            // Add more color customizations here
+            secondary: {
+              50: "#1A1A1A",
+              100: "#2A2A2A",
+              200: "#3A3A3A",
+              300: "#4A4A4A",
+              400: "#5A5A5A",
+              500: "#6A6A6A",
+              600: "#7A7A7A",
+              700: "#8A8A8A",
+              800: "#9A9A9A",
+              900: "#AAAAAA",
+              DEFAULT: "#6A6A6A",
+            },
+            // Additional color customizations can be added here
           },
         },
       },
-      defaultTheme: "n-dark", // Set n-dark as the default theme
+      defaultTheme: "n-dark", // This line sets n-dark as the default theme
     }),
   ],
 };

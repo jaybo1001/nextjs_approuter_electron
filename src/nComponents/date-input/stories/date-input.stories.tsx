@@ -100,7 +100,7 @@ const LabelPlacementTemplate = (args: DateInputProps) => (
 const ControlledTemplate = (args: DateInputProps) => {
   const [value, setValue] = React.useState<DateValue>(parseDate("2024-04-04"));
 
-  let formatter = useDateFormatter({dateStyle: "full"});
+  const formatter = useDateFormatter({dateStyle: "full"});
 
   return (
     <div className="w-full flex flex-row gap-2">
@@ -131,7 +131,7 @@ const TimeZonesTemplate = (args: DateInputProps) => (
 );
 
 const GranularityTemplate = (args: DateInputProps) => {
-  let [date, setDate] = React.useState<DateValue>(parseAbsoluteToLocal("2021-04-07T18:45:22Z"));
+  const [date, setDate] = React.useState<DateValue>(parseAbsoluteToLocal("2021-04-07T18:45:22Z"));
 
   return (
     <div className="w-full max-w-xl flex flex-col items-start gap-4">
@@ -155,7 +155,7 @@ const GranularityTemplate = (args: DateInputProps) => {
 };
 
 const InternationalCalendarsTemplate = (args: DateInputProps) => {
-  let [date, setDate] = React.useState<DateValue>(parseAbsoluteToLocal("2021-04-07T18:45:22Z"));
+  const [date, setDate] = React.useState<DateValue>(parseAbsoluteToLocal("2021-04-07T18:45:22Z"));
 
   return (
     <div className="flex flex-col gap-4">

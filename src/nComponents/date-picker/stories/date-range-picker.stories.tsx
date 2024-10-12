@@ -115,7 +115,7 @@ const ControlledTemplate = (args: DateRangePickerProps) => {
     end: parseDate("2024-04-08"),
   });
 
-  let formatter = useDateFormatter({dateStyle: "long"});
+  const formatter = useDateFormatter({dateStyle: "long"});
 
   return (
     <div className="flex flex-row gap-2">
@@ -173,7 +173,7 @@ const TimeZonesTemplate = (args: DateRangePickerProps) => (
 );
 
 const GranularityTemplate = (args: DateRangePickerProps) => {
-  let [date, setDate] = React.useState<RangeValue<DateValue>>({
+  const [date, setDate] = React.useState<RangeValue<DateValue>>({
     start: parseAbsoluteToLocal("2024-04-01T18:45:22Z"),
     end: parseAbsoluteToLocal("2024-04-08T19:15:22Z"),
   });
@@ -201,7 +201,7 @@ const GranularityTemplate = (args: DateRangePickerProps) => {
 };
 
 const InternationalCalendarsTemplate = (args: DateRangePickerProps) => {
-  let [date, setDate] = React.useState<RangeValue<DateValue>>({
+  const [date, setDate] = React.useState<RangeValue<DateValue>>({
     start: parseAbsoluteToLocal("2021-04-01T18:45:22Z"),
     end: parseAbsoluteToLocal("2021-04-14T19:15:22Z"),
   });
@@ -216,9 +216,9 @@ const InternationalCalendarsTemplate = (args: DateRangePickerProps) => {
 };
 
 const UnavailableDatesTemplate = (args: DateRangePickerProps) => {
-  let now = today(getLocalTimeZone());
+  const now = today(getLocalTimeZone());
 
-  let disabledRanges = [
+  const disabledRanges = [
     [now, now.add({days: 5})],
     [now.add({days: 14}), now.add({days: 16})],
     [now.add({days: 23}), now.add({days: 24})],
@@ -247,7 +247,7 @@ const UnavailableDatesTemplate = (args: DateRangePickerProps) => {
 };
 
 const NonContiguousRangesTemplate = (args: DateRangePickerProps) => {
-  let {locale} = useLocale();
+  const {locale} = useLocale();
 
   return (
     <DateRangePicker
@@ -262,22 +262,22 @@ const NonContiguousRangesTemplate = (args: DateRangePickerProps) => {
 };
 
 const PresetsTemplate = (args: DateRangePickerProps) => {
-  let defaultDate = {
+  const defaultDate = {
     start: today(getLocalTimeZone()),
     end: today(getLocalTimeZone()).add({days: 7}),
   };
 
   const [value, setValue] = React.useState<RangeValue<DateValue>>(defaultDate);
 
-  let {locale} = useLocale();
-  let formatter = useDateFormatter({dateStyle: "full"});
+  const {locale} = useLocale();
+  const formatter = useDateFormatter({dateStyle: "full"});
 
-  let now = today(getLocalTimeZone());
-  let nextWeek = {
+  const now = today(getLocalTimeZone());
+  const nextWeek = {
     start: startOfWeek(now.add({weeks: 1}), locale),
     end: endOfWeek(now.add({weeks: 1}), locale),
   };
-  let nextMonth = {
+  const nextMonth = {
     start: startOfMonth(now.add({months: 1})),
     end: endOfMonth(now.add({months: 1})),
   };

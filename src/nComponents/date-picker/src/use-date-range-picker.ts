@@ -95,7 +95,7 @@ export function useDateRangePicker<T extends DateValue>({
     selectorIconProps,
   } = useDatePickerBase({...originalProps, validationBehavior});
 
-  let state: DateRangePickerState = useDateRangePickerState({
+  const state: DateRangePickerState = useDateRangePickerState({
     ...originalProps,
     validationBehavior,
     shouldCloseOnSelect: () => !state.hasTime,
@@ -103,7 +103,7 @@ export function useDateRangePicker<T extends DateValue>({
 
   const popoverTriggerRef = useRef<HTMLDivElement>(null);
 
-  let {
+  const {
     groupProps,
     labelProps,
     startFieldProps,

@@ -68,7 +68,7 @@ export function useBadge(originalProps: UseBadgeProps) {
     () =>
       badge({
         ...variantProps,
-        showOutline: !!originalProps?.disableOutline
+        showOutline: originalProps?.disableOutline
           ? !originalProps?.disableOutline
           : originalProps?.showOutline,
         isOneChar,

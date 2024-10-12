@@ -345,13 +345,13 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   // scroll the listbox to the selected item
   useEffect(() => {
     if (state.isOpen && popoverRef.current && listBoxRef.current) {
-      let selectedItem = listBoxRef.current.querySelector("[aria-selected=true] [data-label=true]");
-      let scrollShadow = scrollShadowRef.current;
+      const selectedItem = listBoxRef.current.querySelector("[aria-selected=true] [data-label=true]");
+      const scrollShadow = scrollShadowRef.current;
 
       // scroll the listbox to the selected item
       if (selectedItem && scrollShadow && selectedItem.parentElement) {
-        let scrollShadowRect = scrollShadow?.getBoundingClientRect();
-        let scrollShadowHeight = scrollShadowRect.height;
+        const scrollShadowRect = scrollShadow?.getBoundingClientRect();
+        const scrollShadowHeight = scrollShadowRect.height;
 
         scrollShadow.scrollTop =
           selectedItem.parentElement.offsetTop -
@@ -371,8 +371,8 @@ export function useSelect<T extends object>(originalProps: UseSelectProps<T>) {
   // apply the same with to the popover as the select
   useEffect(() => {
     if (state.isOpen && popoverRef.current && triggerRef.current) {
-      let selectRect = triggerRef.current.getBoundingClientRect();
-      let popover = popoverRef.current;
+      const selectRect = triggerRef.current.getBoundingClientRect();
+      const popover = popoverRef.current;
 
       popover.style.width = selectRect.width + "px";
     }

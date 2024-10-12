@@ -27,7 +27,7 @@ export interface SeparatorAria {
  * e.g. groups of menu items or sections of a page.
  */
 export function useSeparator(props: SeparatorProps): SeparatorAria {
-  let domProps = filterDOMProps(props, {
+  const domProps = filterDOMProps(props, {
     enabled: typeof props.elementType === "string",
   });
 

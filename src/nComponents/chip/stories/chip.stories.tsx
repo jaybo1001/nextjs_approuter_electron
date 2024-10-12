@@ -78,7 +78,7 @@ export const EndContent = {
 export const Closeable = {
   args: {
     ...defaultProps,
-    // eslint-disable-next-line
+     
     onClose: () => console.log("Close"),
   },
 };
@@ -87,7 +87,7 @@ export const CustomCloseIcon = {
   args: {
     ...defaultProps,
     endContent: <CheckIcon />,
-    // eslint-disable-next-line
+     
     onClose: () => console.log("Close"),
   },
 };

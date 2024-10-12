@@ -120,7 +120,7 @@ describe("Menu", () => {
   });
 
   it("should work with single selection (controlled)", async () => {
-    let onSelectionChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Menu
@@ -138,11 +138,11 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menu = wrapper.getByRole("menu");
+    const menu = wrapper.getByRole("menu");
 
     expect(menu).toBeTruthy();
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -154,7 +154,7 @@ describe("Menu", () => {
   });
 
   it("should work with multiple selection (controlled)", async () => {
-    let onSelectionChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Menu
@@ -172,11 +172,11 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menu = wrapper.getByRole("menu");
+    const menu = wrapper.getByRole("menu");
 
     expect(menu).toBeTruthy();
 
-    let menuItems = wrapper.getAllByRole("menuitemcheckbox");
+    const menuItems = wrapper.getAllByRole("menuitemcheckbox");
 
     expect(menuItems.length).toBe(4);
 
@@ -199,7 +199,7 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitemradio");
+    const menuItems = wrapper.getAllByRole("menuitemradio");
 
     expect(menuItems.length).toBe(4);
 
@@ -208,7 +208,7 @@ describe("Menu", () => {
     expect(menuItems[2].getAttribute("aria-checked")).toBe("false");
     expect(menuItems[3].getAttribute("aria-checked")).toBe("false");
 
-    let svg = menuItems[0].querySelector("svg");
+    const svg = menuItems[0].querySelector("svg");
 
     expect(svg).toBeTruthy();
 
@@ -227,7 +227,7 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitemcheckbox");
+    const menuItems = wrapper.getAllByRole("menuitemcheckbox");
 
     expect(menuItems.length).toBe(4);
 
@@ -236,13 +236,13 @@ describe("Menu", () => {
     expect(menuItems[2].getAttribute("aria-checked")).toBe("false");
     expect(menuItems[3].getAttribute("aria-checked")).toBe("false");
 
-    let checkmark1 = menuItems[0].querySelector("svg");
+    const checkmark1 = menuItems[0].querySelector("svg");
 
     expect(checkmark1).toBeTruthy();
 
     expect(checkmark1?.getAttribute("data-selected")).toBe("true");
 
-    let checkmark2 = menuItems[1].querySelector("svg");
+    const checkmark2 = menuItems[1].querySelector("svg");
 
     expect(checkmark2).toBeTruthy();
 
@@ -261,7 +261,7 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitem");
+    const menuItems = wrapper.getAllByRole("menuitem");
 
     expect(menuItems.length).toBe(4);
 
@@ -270,13 +270,13 @@ describe("Menu", () => {
     expect(menuItems[2].getAttribute("aria-checked")).toBeFalsy();
     expect(menuItems[3].getAttribute("aria-checked")).toBeFalsy();
 
-    let checkmark1 = menuItems[0].querySelector("svg");
+    const checkmark1 = menuItems[0].querySelector("svg");
 
     expect(checkmark1).toBeFalsy();
   });
 
   it("should dispatch onAction events correctly", async () => {
-    let onAction = jest.fn();
+    const onAction = jest.fn();
 
     const wrapper = render(
       <Menu aria-label="Actions" onAction={onAction}>
@@ -289,7 +289,7 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitem");
+    const menuItems = wrapper.getAllByRole("menuitem");
 
     await act(async () => {
       await userEvent.click(menuItems[1]);
@@ -299,7 +299,7 @@ describe("Menu", () => {
   });
 
   it("should not dispatch onAction events if item is disabled", async () => {
-    let onAction = jest.fn();
+    const onAction = jest.fn();
 
     const wrapper = render(
       <Menu aria-label="Actions" onAction={onAction}>
@@ -314,7 +314,7 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitem");
+    const menuItems = wrapper.getAllByRole("menuitem");
 
     await act(async () => {
       await userEvent.click(menuItems[1]);
@@ -324,9 +324,9 @@ describe("Menu", () => {
   });
 
   it("should dispatch onPress, onAction and onClick events", async () => {
-    let onPress = jest.fn();
-    let onClick = jest.fn();
-    let onAction = jest.fn();
+    const onPress = jest.fn();
+    const onClick = jest.fn();
+    const onAction = jest.fn();
 
     const wrapper = render(
       <Menu aria-label="Actions" onAction={onAction}>
@@ -341,7 +341,7 @@ describe("Menu", () => {
       </Menu>,
     );
 
-    let menuItems = wrapper.getAllByRole("menuitem");
+    const menuItems = wrapper.getAllByRole("menuitem");
 
     await act(async () => {
       await userEvent.click(menuItems[0]);

@@ -128,7 +128,7 @@ describe("Select", () => {
   });
 
   it("should work with single selection (controlled)", async () => {
-    let onSelectionChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Select
@@ -145,11 +145,11 @@ describe("Select", () => {
       </Select>,
     );
 
-    let listbox = wrapper.getByRole("listbox");
+    const listbox = wrapper.getByRole("listbox");
 
     expect(listbox).toBeTruthy();
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(3);
 
@@ -161,7 +161,7 @@ describe("Select", () => {
   });
 
   it("should work with multiple selection (controlled)", async () => {
-    let onSelectionChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Select
@@ -178,11 +178,11 @@ describe("Select", () => {
       </Select>,
     );
 
-    let listbox = wrapper.getByRole("listbox");
+    const listbox = wrapper.getByRole("listbox");
 
     expect(listbox).toBeTruthy();
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(3);
 
@@ -323,7 +323,7 @@ describe("Select", () => {
   });
 
   it("disabled select shouldn't update by keyboard", async () => {
-    let onSelectionChange = jest.fn();
+    const onSelectionChange = jest.fn();
 
     const wrapper = render(
       <Select
@@ -562,7 +562,7 @@ describe("Select", () => {
           e.preventDefault();
           const formData = new FormData(e.target as HTMLFormElement);
 
-          /* eslint-disable no-console */
+           
           // @ts-ignore
           console.log(JSON.stringify(Object.fromEntries(formData)));
         }}
@@ -672,11 +672,11 @@ describe("Select", () => {
       </Select>,
     );
 
-    let listbox = wrapper.getByRole("listbox");
+    const listbox = wrapper.getByRole("listbox");
 
     expect(listbox).toBeTruthy();
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(10);
 
@@ -688,7 +688,7 @@ describe("Select", () => {
   });
 
   it("should work with onChange (>= 300 select items)", async () => {
-    let onChange = jest.fn();
+    const onChange = jest.fn();
 
     let options = new Array(300).fill("");
 
@@ -706,11 +706,11 @@ describe("Select", () => {
       </Select>,
     );
 
-    let listbox = wrapper.getByRole("listbox");
+    const listbox = wrapper.getByRole("listbox");
 
     expect(listbox).toBeTruthy();
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     expect(listboxItems.length).toBe(300);
 
@@ -801,7 +801,7 @@ describe("Select with React Hook Form", () => {
 
     expect(select3).toHaveAttribute("aria-expanded", "true");
 
-    let listboxItems = wrapper.getAllByRole("option");
+    const listboxItems = wrapper.getAllByRole("option");
 
     await user.click(listboxItems[1]);
 

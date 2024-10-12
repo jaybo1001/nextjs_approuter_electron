@@ -67,7 +67,7 @@ describe("Snippet - Clipboard", () => {
   it('should copy text to clipboard when "copy" button is clicked', async () => {
     jest.spyOn(navigator.clipboard, "writeText");
 
-    let code = "npm install @nextui-org/react";
+    const code = "npm install @nextui-org/react";
 
     const wrapper = render(<Snippet data-testid="code-test">{code}</Snippet>);
 

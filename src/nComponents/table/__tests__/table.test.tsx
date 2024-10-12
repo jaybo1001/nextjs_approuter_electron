@@ -10,7 +10,7 @@ const columns = [
   {name: "Baz", key: "baz"},
 ];
 
-let items = [
+const items = [
   {test: "Test 1", foo: "Foo 1", bar: "Bar 1", yay: "Yay 1", baz: "Baz 1"},
   {test: "Test 2", foo: "Foo 2", bar: "Bar 2", yay: "Yay 2", baz: "Baz 2"},
 ];

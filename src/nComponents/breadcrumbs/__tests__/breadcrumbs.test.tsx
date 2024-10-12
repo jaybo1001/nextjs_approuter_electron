@@ -108,7 +108,7 @@ describe("Breadcrumbs", () => {
   });
 
   it("should support aria-labelledby", function () {
-    let {getByRole} = render(
+    const {getByRole} = render(
       <>
         <span id="test">Test</span>
         <Breadcrumbs aria-labelledby="test">
@@ -123,7 +123,7 @@ describe("Breadcrumbs", () => {
   });
 
   it("should support aria-describedby", function () {
-    let {getByRole} = render(
+    const {getByRole} = render(
       <>
         <span id="test">Test</span>
         <Breadcrumbs aria-describedby="test">

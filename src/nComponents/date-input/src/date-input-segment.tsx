@@ -23,7 +23,7 @@ export const DateInputSegment: React.FC<DateInputSegmentProps> = ({
 }) => {
   const ref = useRef(null);
 
-  let {segmentProps} = useDateSegment(segment, state, ref);
+  const {segmentProps} = useDateSegment(segment, state, ref);
 
   // @ts-expect-error autoCapitalize is not a valid prop
   // Removing autoCapitalize as it causes bugs in Firefox.

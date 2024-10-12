@@ -49,7 +49,7 @@ const defaultProps = {
 const Template = (args: CalendarProps) => <Calendar {...args} />;
 
 const ControlledTemplate = (args: CalendarProps) => {
-  let [value, setValue] = React.useState<DateValue>(parseDate("2024-03-07"));
+  const [value, setValue] = React.useState<DateValue>(parseDate("2024-03-07"));
 
   return (
     <div className="flex flex-wrap gap-4">
@@ -76,17 +76,17 @@ const ControlledTemplate = (args: CalendarProps) => {
 };
 
 const UnavailableDatesTemplate = (args: CalendarProps) => {
-  let now = today(getLocalTimeZone());
+  const now = today(getLocalTimeZone());
 
-  let disabledRanges = [
+  const disabledRanges = [
     [now, now.add({days: 5})],
     [now.add({days: 14}), now.add({days: 16})],
     [now.add({days: 23}), now.add({days: 24})],
   ];
 
-  let {locale} = useLocale();
+  const {locale} = useLocale();
 
-  let isDateUnavailable = (date) =>
+  const isDateUnavailable = (date) =>
     isWeekend(date, locale) ||
     disabledRanges.some(
       (interval) => date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0,
@@ -103,8 +103,8 @@ const UnavailableDatesTemplate = (args: CalendarProps) => {
 };
 
 const ControlledFocusedValueTemplate = (args: CalendarProps) => {
-  let defaultDate = today(getLocalTimeZone());
-  let [focusedDate, setFocusedDate] = React.useState<DateValue>(defaultDate);
+  const defaultDate = today(getLocalTimeZone());
+  const [focusedDate, setFocusedDate] = React.useState<DateValue>(defaultDate);
 
   return (
     <div className="flex flex-col gap-4">
@@ -127,9 +127,9 @@ const ControlledFocusedValueTemplate = (args: CalendarProps) => {
 };
 
 const InvalidDateTemplate = (args: CalendarProps) => {
-  let [date, setDate] = React.useState<DateValue>(today(getLocalTimeZone()));
-  let {locale} = useLocale();
-  let isInvalid = isWeekend(date, locale);
+  const [date, setDate] = React.useState<DateValue>(today(getLocalTimeZone()));
+  const {locale} = useLocale();
+  const isInvalid = isWeekend(date, locale);
 
   return (
     <Calendar
@@ -154,13 +154,13 @@ const InternationalCalendarsTemplate = (args: CalendarProps) => {
 };
 
 const PresetsTemplate = (args: CalendarProps) => {
-  let defaultDate = today(getLocalTimeZone());
-  let [value, setValue] = React.useState<DateValue>(defaultDate);
-  let {locale} = useLocale();
+  const defaultDate = today(getLocalTimeZone());
+  const [value, setValue] = React.useState<DateValue>(defaultDate);
+  const {locale} = useLocale();
 
-  let now = today(getLocalTimeZone());
-  let nextWeek = startOfWeek(now.add({weeks: 1}), locale);
-  let nextMonth = startOfMonth(now.add({months: 1}));
+  const now = today(getLocalTimeZone());
+  const nextWeek = startOfWeek(now.add({weeks: 1}), locale);
+  const nextMonth = startOfMonth(now.add({months: 1}));
 
   const CustomRadio = (props) => {
     const {children, ...otherProps} = props;
